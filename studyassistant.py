@@ -14,6 +14,19 @@ class StudyAssistant:
     def add_note(self, note):
         self.notes.append(note)
 
+    def view_notes(self):
+        for index, note in enumerate(self.notes, 1):
+            print(index, note)
+
+    def search_notes(self, keyword):
+        for note in self.notes:
+            found = False
+            if keyword.lower() in note.title.lower():
+                found = True
+                print(note)
+            if not found:
+                print(f'No notes found matching {keyword}.')
+
 
 note1 = Note(
     "Python Dictionaries",
@@ -21,10 +34,18 @@ note1 = Note(
     "Python"
 )
 
+note2 = Note(
+    "Python Classes",
+    "A class is a blueprint for creating objects.",
+    "Python"
+)
+
 assistant = StudyAssistant()
 
 assistant.add_note(note1)
+assistant.view_notes(note1)
 
-print(assistant.notes)
 
-print(note1)
+# print(assistant.notes)
+
+# print(note1)
