@@ -19,13 +19,34 @@ class StudyAssistant:
             print(index, note)
 
     def search_notes(self, keyword):
+        found = False
         for note in self.notes:
-            found = False
             if keyword.lower() in note.title.lower():
                 found = True
                 print(note)
-            if not found:
-                print(f'No notes found matching {keyword}.')
+        if not found:
+            print(f'No notes found matching {keyword}.')
+
+class Task:
+    def __init__(self, description): 
+        self.description = description
+        self.completed = False
+
+    def mark_complete(self):
+        self.completed = True
+
+    def __str__(self):
+        status = "x" if self.completed else " "
+        return f"[{status}] {self.description}"
+
+
+task1 = Task("Practice Python classes")
+
+print(task1)
+
+task1.mark_complete()
+
+print(task1)
 
 
 note1 = Note(
@@ -42,8 +63,8 @@ note2 = Note(
 
 assistant = StudyAssistant()
 
-assistant.add_note(note1)
-assistant.view_notes(note1)
+# assistant.add_note(note1)
+# assistant.view_notes(note1)
 
 
 # print(assistant.notes)
