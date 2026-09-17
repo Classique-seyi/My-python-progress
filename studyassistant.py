@@ -10,6 +10,14 @@ class Note:
 class StudyAssistant:
     def __init__(self):
         self.notes = []
+        self.tasks = []
+
+    def add_task(self,task):
+        self.tasks.append(task)
+
+    def view_tasks(self):
+        for index, task in enumerate(self.tasks,1):
+            print(index, task)
 
     def add_note(self, note):
         self.notes.append(note)
@@ -57,6 +65,12 @@ note1 = Note(
 
 note2 = Note(
     "Python Classes",
+    "A class is a blueprint for creating objects.",
+    "Python"
+)
+
+note3 = Note(
+    "Python Functions",
     "A class is a blueprint for creating objects.",
     "Python"
 )
