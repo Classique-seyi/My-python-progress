@@ -64,6 +64,9 @@ class StudyAssistant:
         for index, task in enumerate(self.tasks,1):
             print(index, task)
 
+    def delete_tasks(self, task_number):
+        pass
+
     def tasks_to_dict(self):
         result = []
         for task in self.tasks:
@@ -120,16 +123,20 @@ def main():
 5. View tasks
 6. Complete task
 7. Exit
+8. Delete task
 ''')
         choice = input("Choose an option: ")
         if choice == "1":
-            title = input("Enter note title: ")
-            content = input("Enter note content: ")
-            subject = input("Enter note subject: ")
+            title = input("Enter note title: ").strip()
+            content = input("Enter note content: ").strip()
+            subject = input("Enter note subject: ").strip()
 
-            note = Note(title, content, subject)
-            assistant.add_note(note)
-            assistant.save_notes()
+            if not title or not content:
+                print("Note title and content cannot be empty.")
+            else:
+                note = Note(title, content, subject)
+                assistant.add_note(note)
+                assistant.save_notes()
             
 
         elif choice == "2":
@@ -140,11 +147,14 @@ def main():
             assistant.search_notes(keyword.strip())
 
         elif choice == "4":
-            description = input("Enter task description: ")
+            description = input("Enter task description: ").strip()
 
-            task = Task(description)
-            assistant.add_task(task)
-            assistant.save_tasks()
+            if not description:
+                print("Task description cannot be empty.")
+            else:
+                task = Task(description)
+                assistant.add_task(task)
+                assistant.save_tasks()
 
         elif choice == "5":
             assistant.view_tasks()
@@ -152,8 +162,12 @@ def main():
         elif choice == "6":
             try:
                 completed = int(input("Enter task number to complete: "))
-                task = assistant.tasks[completed -1]
-                task.mark_complete()
+                if completed <= 0 or completed > len(assistant.tasks):
+                    print("Task number not found")
+                else:
+                    task = assistant.tasks[completed -1]
+                    task.mark_complete()
+                    assistant.save_tasks()
             except ValueError:
                 print("Please enter a valid task number.")
             except IndexError:
