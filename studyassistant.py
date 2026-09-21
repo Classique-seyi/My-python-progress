@@ -64,8 +64,10 @@ class StudyAssistant:
         for index, task in enumerate(self.tasks,1):
             print(index, task)
 
-    def delete_tasks(self, task_number):
-        pass
+    def delete_task(self, task_number):
+        index = task_number - 1
+        task = self.tasks.pop(index)
+        print(f"{task} successfully deleted")
 
     def tasks_to_dict(self):
         result = []
@@ -176,6 +178,9 @@ def main():
         elif choice == "7":
             print("Goodbye!")
             break
+
+        elif choice == "8":
+            task_number = int
 
         else:
             print("Invalid option. Please choose a number from 1 to 7.")
